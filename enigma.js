@@ -48,7 +48,7 @@ export class Enigma {
   }
 
   encrypt(phrase, state) {
-    phrase = phrase.toUpperCase(); // TODO: Support lowercase letters
+    phrase = phrase.toUpperCase();
 
     if (state) this.setState(state);
     const cipherText = stringMap(phrase, char => this.cipher(char));

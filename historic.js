@@ -1,18 +1,19 @@
 // https://en.wikipedia.org/wiki/Enigma_rotor_details#Rotor_wiring_tables
 
-/**
- * Rotor #	ABCDEFGHIJKLMNOPQRSTUVWXYZ	Date              Introduced	Model Name & Number
- * I	      JGDQOXUSCAMIFRVTPNEWKBLZYH	7 February 1941	  German Railway (Rocket)
- * II	      NTZPSFBOKMWRCJDIVLAEYUXHGQ	7 February 1941	  German Railway (Rocket)
- * III	    JVIUBHTCDYAKEQZPOSGXNRMWFL	7 February 1941	  German Railway (Rocket)
- * UKW	    QYHOGNECVPUZTFDJAXWMKISRBL	7 February 1941	  German Railway (Rocket)
- * ETW	    QWERTZUIOASDFGHJKPYXCVBNML	7 February 1941	  German Railway (Rocket)
- */
-
 import { Reflector, Wheel } from "./Enigma.js";
 
-export const rotorI = new Wheel("JGDQOXUSCAMIFRVTPNEWKBLZYH");
-export const rotorII = new Wheel("NTZPSFBOKMWRCJDIVLAEYUXHGQ");
-export const rotorIII = new Wheel("JVIUBHTCDYAKEQZPOSGXNRMWFL");
-export const reflectorUKW = new Reflector("QYHOGNECVPUZTFDJAXWMKISRBL");
-// export const rotorETW = new Wheel("QWERTZUIOASDFGHJKPYXCVBNML");
+export const rocket = {
+  I: new Wheel("JGDQOXUSCAMIFRVTPNEWKBLZYH"),
+  II: new Wheel("NTZPSFBOKMWRCJDIVLAEYUXHGQ"),
+  III: new Wheel("JVIUBHTCDYAKEQZPOSGXNRMWFL"),
+  UKW: new Reflector("QYHOGNECVPUZTFDJAXWMKISRBL"),
+  // ETW: new Wheel("QWERTZUIOASDFGHJKPYXCVBNML"),
+};
+
+export const swissK = {
+  I: new Wheel("PEZUOHXSCVFMTBGLRINQJWAYDK"),
+  II: new Wheel("ZOUESYDKFWPCIQXHMVBLGNJRAT"),
+  III: new Wheel("EHRVXGAOBQUSIMZFLYNWKTPDJC"),
+  UKW: new Reflector("IMETCGFRAYSQBZXWLHKDVUPOJN"),
+  // ETW: new Wheel("QWERTZUIOASDFGHJKPYXCVBNML"),
+};

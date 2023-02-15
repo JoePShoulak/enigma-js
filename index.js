@@ -1,7 +1,7 @@
 import Enigma from "./Enigma.js";
-import { rotorI, rotorII, rotorIII, reflectorUKW } from "./historic.js";
+import { rocket as R } from "./historic.js";
 
-const enigma = new Enigma([rotorI, rotorII, rotorIII], reflectorUKW);
+const enigma = new Enigma([R.I, R.II, R.III], R.UKW);
 
 const plainText = "Fortune Favors the Bold!";
 
