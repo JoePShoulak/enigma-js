@@ -1,4 +1,4 @@
-const plainAlpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+import { stringMap, plainAlpha, isLetter } from "./helper.js";
 
 export class Wheel {
   constructor(key, turnover) {
@@ -33,7 +33,7 @@ export class Reflector {
     this.key = key;
   }
 
-  cipher(char) {
+  reflect(char) {
     const index = plainAlpha.indexOf(char);
     const cipher = this.key[index];
 
@@ -48,49 +48,50 @@ export class Enigma {
   }
 
   encrypt(phrase, state) {
-    if (state) this.setState(...state);
-    const cipherText = phrase
-      .split("")
-      .map(char => this.cipher(char))
-      .join("");
+    phrase = phrase.toUpperCase(); // TODO: Support lowercase letters
+
+    if (state) this.setState(state);
+    const cipherText = stringMap(phrase, char => this.cipher(char));
     this.reset();
 
     return cipherText;
   }
 
+  wheelAction(char, reverse = false) {
+    const wheels = reverse ? [...this.wheels].reverse() : this.wheels;
+
+    wheels.forEach(wheel => (char = wheel.cipher(char, reverse)));
+
+    return char;
+  }
+
   cipher(char) {
-    const DEBUG = false;
+    if (!isLetter(char)) return char;
 
-    if (DEBUG) console.log("Input:", char);
-
-    this.wheels.forEach(wheel => (char = wheel.cipher(char)));
-
-    char = this.reflector.cipher(char);
-
-    [...this.wheels]
-      .reverse()
-      .forEach(wheel => (char = wheel.cipher(char, true)));
-
-    if (DEBUG) console.log("Output:", char);
+    char = this.wheelAction(char);
+    char = this.reflector.reflect(char);
+    char = this.wheelAction(char, true);
 
     this.advance();
 
     return char;
   }
 
-  setState(a, b, c) {
-    this.wheels[0].position = a;
-    this.wheels[1].position = b;
-    this.wheels[2].position = c;
+  setState(state) {
+    this.wheels.forEach((wheel, index) => (wheel.position = state[index]));
   }
 
   advance() {
-    let next = this.wheels[0].advance();
-    if (next) next = this.wheels[1].advance();
-    if (next) this.wheels[2].advance();
+    for (let i = 0; i < this.wheels.length; i++) {
+      const wheel = this.wheels[i];
+      const cont = wheel.advance();
+      if (!cont) break;
+    }
   }
 
   reset() {
     this.wheels.forEach(w => (w.position = 0));
   }
 }
+
+export default Enigma;

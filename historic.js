@@ -9,7 +9,7 @@
  * ETW	    QWERTZUIOASDFGHJKPYXCVBNML	7 February 1941	  German Railway (Rocket)
  */
 
-import { Reflector, Wheel } from "./enigma.js";
+import { Reflector, Wheel } from "./Enigma.js";
 
 export const rotorI = new Wheel("JGDQOXUSCAMIFRVTPNEWKBLZYH");
 export const rotorII = new Wheel("NTZPSFBOKMWRCJDIVLAEYUXHGQ");
